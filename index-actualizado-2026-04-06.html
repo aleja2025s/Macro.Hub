@@ -961,6 +961,58 @@
       border-color: rgba(130, 10, 209, 0.28);
     }
 
+    .card > summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 0.72rem 0.8rem;
+    }
+
+    .card > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .card-summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.7rem;
+    }
+
+    .card-main {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.62rem;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .card-title {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.35;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    .card-right {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.42rem;
+      flex-shrink: 0;
+    }
+
+    .card-chevron {
+      color: #b4b4c3;
+      font-size: 0.82rem;
+      font-weight: 900;
+      transition: transform 0.18s ease;
+    }
+
+    .card[open] .card-chevron {
+      transform: rotate(180deg);
+    }
+
     .channels {
       display: flex;
       flex-wrap: wrap;
@@ -986,7 +1038,7 @@
       gap: 0.3rem;
       font-size: 0.74rem;
       font-weight: 700;
-      padding: 0.28rem 0.55rem;
+      padding: 0.22rem 0.52rem;
       border-radius: 999px;
       border: 1px solid transparent;
     }
@@ -1116,6 +1168,13 @@
       background: var(--nu-soft);
       color: var(--nu-dark);
       font-weight: 600;
+    }
+
+    .tag.actual {
+      background: linear-gradient(135deg, #f4ecff 0%, #ede4ff 100%);
+      color: #5b0a9a;
+      font-weight: 800;
+      border: 1px solid rgba(130, 10, 209, 0.24);
     }
 
     .tag-desactivada {
@@ -2675,11 +2734,8 @@
       function buildActiveCard(row, index) {
         const title = escapeHtml(row.nombre || row.propuestaNombre || "(Sin nombre)");
         const indexBadge = `<span class="macro-index">${String(index || 0).padStart(2, "0")}</span>`;
-        const cr = row.contactReason
-          ? `<span class="tag cr" title="${escapeHtml(row.contactReason)}">${escapeHtml(row.contactReason.length > 56 ? row.contactReason.slice(0, 53) + "…" : row.contactReason)}</span>`
-          : "";
         const cra = row.contactReasonActual
-          ? `<span class="tag" title="${escapeHtml(row.contactReasonActual)}">ACTUAL: ${escapeHtml(row.contactReasonActual.length > 48 ? row.contactReasonActual.slice(0, 45) + "…" : row.contactReasonActual)}</span>`
+          ? `<span class="tag actual" title="${escapeHtml(row.contactReasonActual)}">${escapeHtml(row.contactReasonActual.length > 60 ? row.contactReasonActual.slice(0, 57) + "…" : row.contactReasonActual)}</span>`
           : "";
         const accionTag = row.accion
           ? `<span class="tag" title="${escapeHtml(row.accion)}"><strong>Acción:</strong> ${escapeHtml(row.accion.length > 44 ? row.accion.slice(0, 41) + "…" : row.accion)}</span>`
@@ -2698,16 +2754,9 @@
           ? `<a class="title-link" href="${escapeHtml(cardUrl)}" target="_blank" rel="noopener">${title}</a>`
           : title;
 
-        const chatChip = `<span class="ch ${chatOn ? "on" : "off"}"><span class="ch-dot"></span>Chat ${chatOn ? "Sí" : "No"}</span>`;
-        const zdChip = `<span class="ch ${zdOn ? "on" : "off"}"><span class="ch-dot"></span>Zendesk ${zdOn ? "Sí" : "No"}</span>`;
-        const linkHtml = zdUrl
-          ? `<a class="zd-link" href="${escapeHtml(zdUrl)}" target="_blank" rel="noopener">${ctaLabel}</a>`
-          : zdFallbackUrl
-          ? `<a class="zd-link" href="${escapeHtml(zdFallbackUrl)}" target="_blank" rel="noopener">${ctaLabel}</a>`
-          : `<span class="zd-link muted" title="Sin URL en el CSV">Sin link Zendesk</span>`;
-        const copyLinkHtml = cardUrl
-          ? `<button type="button" class="mini-link-btn" data-copy-link="${escapeHtml(cardUrl)}">Copiar link</button>`
-          : "";
+        const chatChip = chatOn ? `<span class="ch on">Chat</span>` : "";
+        const zdChip = zdOn ? `<span class="ch on">Zendesk</span>` : "";
+        const channelChips = `${chatChip}${zdChip}` || `<span class="ch off">Sin canal</span>`;
 
         const blocks = [];
         if (row.macro) blocks.push({ label: "Macro (cuerpo)", text: row.macro });
@@ -2731,25 +2780,24 @@
                 .join("");
 
         return `
-            <article class="card">
-              <div class="channels">
-                <span class="ch-label">Canales</span>
-                ${chatChip}
-                ${zdChip}
-                ${copyLinkHtml}
-                ${linkHtml}
-              </div>
-              <div class="card-h">
-                <div class="title-row">
-                  ${indexBadge}
-                  <h3>${titleHtml}</h3>
+            <details class="card">
+              <summary>
+                <div class="card-summary">
+                  <div class="card-main">
+                    ${indexBadge}
+                    <h3 class="card-title">${titleHtml}</h3>
+                  </div>
+                  <div class="card-right">
+                    ${channelChips}
+                    <span class="card-chevron" aria-hidden="true">▾</span>
+                  </div>
                 </div>
-                <div class="tags">${cr}${cra}${accionTag}${estadoTag}</div>
-              </div>
+              </summary>
               <div class="card-b">
+                <div class="tags">${cra}${accionTag}${estadoTag}</div>
                 ${details}
               </div>
-            </article>`;
+            </details>`;
       }
 
       function groupDesactivadasByTitle(rows) {
@@ -2867,7 +2915,7 @@
           `;
         }
 
-        results.querySelectorAll("article.card").forEach((card) => {
+        results.querySelectorAll(".card").forEach((card) => {
           card.querySelectorAll("button.mini-link-btn[data-copy-link]").forEach((btn) => {
             btn.addEventListener("click", () => copyText(btn.getAttribute("data-copy-link") || ""));
           });
