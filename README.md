@@ -9,6 +9,7 @@ Buscador interno de macros ACQ con interfaz morada estilo Nu.
 - Respaldo embebido sincronizado: `embedded-macros.js`
 - Total de macros cargadas: `431`
 - Ajustes visuales aplicados: portada full screen, secciones diferenciadas (Macro / Frases / Tip), y textos sin abreviaciones.
+- Contenido operativo actualizado: Frases complementarias y Tip para el agente alineados con PDFs de referencia.
 
 ## Archivos (subir todos)
 
