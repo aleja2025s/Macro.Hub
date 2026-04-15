@@ -694,10 +694,10 @@
 
     .view-switch {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       align-items: center;
       gap: 0.45rem;
-      width: min(290px, 100%);
+      width: min(460px, 100%);
       margin: 0 0 0.72rem;
       padding: 0;
       border-radius: 12px;
@@ -725,6 +725,88 @@
 
     .view-pane[hidden] {
       display: none !important;
+    }
+
+    .wedukas-panel {
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .wedukas-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.6rem;
+      padding-top: 0.35rem;
+    }
+
+    .wedukas-mascot {
+      width: 2.4rem;
+      height: 2.4rem;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(130, 10, 209, 0.3);
+      background: radial-gradient(circle at 30% 25%, #c997ff 0%, #820ad1 62%, #6700b8 100%);
+      box-shadow: 0 8px 20px rgba(130, 10, 209, 0.24);
+      color: #fff;
+      font-size: 1.15rem;
+      line-height: 1;
+      animation: soft-pulse 2.6s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+
+    .wedukas-item {
+      display: block;
+      border: 1px solid rgba(130, 10, 209, 0.18);
+      border-radius: 14px;
+      background: linear-gradient(180deg, #fcfaff 0%, #fff 65%);
+      padding: 0.8rem 0.9rem;
+      box-shadow: 0 4px 14px rgba(130, 10, 209, 0.08);
+      text-decoration: none;
+      transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+      cursor: pointer;
+    }
+
+    .wedukas-item:hover {
+      transform: translateY(-1px);
+      border-color: rgba(130, 10, 209, 0.35);
+      box-shadow: 0 8px 20px rgba(130, 10, 209, 0.14);
+    }
+
+    .wedukas-item:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(130, 10, 209, 0.2), 0 8px 20px rgba(130, 10, 209, 0.14);
+    }
+
+    .wedukas-item-title {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      font-weight: 700;
+      color: #2f2950;
+    }
+
+    .wedukas-item-title::before {
+      content: "✨";
+      margin-right: 0.42rem;
+      font-size: 0.78rem;
+      vertical-align: 0.08em;
+    }
+
+    .wedukas-link {
+      display: inline-flex;
+      margin-top: 0.45rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--nu);
+      text-decoration: none;
+    }
+
+    .wedukas-link:hover {
+      text-decoration: underline;
+      color: var(--nu-dark);
     }
 
     .channel-tabs {
@@ -1984,12 +2066,15 @@
     </header>
 
     <div id="toolShell" hidden>
-      <div class="view-switch" id="mainViewSwitch" role="tablist" aria-label="Cambiar entre buscador y aprendizaje" hidden>
+      <div class="view-switch" id="mainViewSwitch" role="tablist" aria-label="Cambiar entre buscador, aprendizaje y Wedukas" hidden>
         <button class="view-btn active" id="tabSearch" data-view="search" type="button" role="tab" aria-selected="true">
           Buscador
         </button>
         <button class="view-btn" id="tabLearn" data-view="learn" type="button" role="tab" aria-selected="false">
           Aprendizaje
+        </button>
+        <button class="view-btn" id="tabWedukas" data-view="wedukas" type="button" role="tab" aria-selected="false">
+          Wedukas
         </button>
       </div>
 
@@ -2819,6 +2904,55 @@
         </div>
       </div>
       </section>
+      <section id="wedukasView" class="view-pane" hidden>
+        <section class="panel">
+          <div class="wedukas-head">
+            <div>
+              <p class="panel-title">Wedukas</p>
+              <p class="panel-sub">Accesos directos por Contact Reason.</p>
+            </div>
+            <div class="wedukas-mascot" aria-hidden="true">nu</div>
+          </div>
+          <div class="wedukas-panel">
+            <a class="wedukas-item" href="https://nucolombia.myweduka.com/DocumentFind/Document?idDocument=4610" target="_blank" rel="noopener">
+              <p class="wedukas-item-title">Registro, aplicación e información de productos Nu (Prospecto)</p>
+              <span class="wedukas-link">Ir a Weduka ↗</span>
+            </a>
+            <a class="wedukas-item" href="https://nucolombia.myweduka.com/DocumentFind/Document?idDocument=4620" target="_blank" rel="noopener">
+              <p class="wedukas-item-title">Dudas relacionadas al resultado de aplicación</p>
+              <span class="wedukas-link">Ir a Weduka ↗</span>
+            </a>
+            <a class="wedukas-item" href="https://nucolombia.myweduka.com/DocumentFind/Document?idDocument=4621" target="_blank" rel="noopener">
+              <p class="wedukas-item-title">Consulta o sugerencia de producto no ofertado</p>
+              <span class="wedukas-link">Ir a Weduka ↗</span>
+            </a>
+            <a class="wedukas-item" href="https://nucolombia.myweduka.com/DocumentFind/Document?idDocument=4624" target="_blank" rel="noopener">
+              <p class="wedukas-item-title">Reactivación o adquisición de otros productos (Cliente o ex-cliente)</p>
+              <span class="wedukas-link">Ir a Weduka ↗</span>
+            </a>
+            <a class="wedukas-item" href="https://nucolombia.myweduka.com/DocumentFind/Document?idDocument=4622" target="_blank" rel="noopener">
+              <p class="wedukas-item-title">Errores en el flujo de registro</p>
+              <span class="wedukas-link">Ir a Weduka ↗</span>
+            </a>
+            <a class="wedukas-item" href="https://nucolombia.myweduka.com/DocumentFind/Document?idDocument=4600" target="_blank" rel="noopener">
+              <p class="wedukas-item-title">Dudas sobre Campañas y Beneficios</p>
+              <span class="wedukas-link">Ir a Weduka ↗</span>
+            </a>
+            <a class="wedukas-item" href="https://nucolombia.myweduka.com/DocumentFind/Document?idDocument=4625" target="_blank" rel="noopener">
+              <p class="wedukas-item-title">Dudas o problemas con programa de referidos</p>
+              <span class="wedukas-link">Ir a Weduka ↗</span>
+            </a>
+            <a class="wedukas-item" href="https://nucolombia.myweduka.com/DocumentFind/Document?idDocument=4604" target="_blank" rel="noopener">
+              <p class="wedukas-item-title">Dudas o problemas en la app después de iniciar sesión</p>
+              <span class="wedukas-link">Ir a Weduka ↗</span>
+            </a>
+            <a class="wedukas-item" href="https://nucolombia.myweduka.com/DocumentFind/Document?idDocument=4616" target="_blank" rel="noopener">
+              <p class="wedukas-item-title">Solicitud de información adicional en el flujo de registro</p>
+              <span class="wedukas-link">Ir a Weduka ↗</span>
+            </a>
+          </div>
+        </section>
+      </section>
     </div>
 
   </div>
@@ -3561,12 +3695,14 @@
       const toast = document.getElementById("toast");
       const tabSearch = document.getElementById("tabSearch");
       const tabLearn = document.getElementById("tabLearn");
+      const tabWedukas = document.getElementById("tabWedukas");
       const introSlide = document.getElementById("introSlide");
       const startToolBtn = document.getElementById("startToolBtn");
       const toolShell = document.getElementById("toolShell");
       const mainViewSwitch = document.getElementById("mainViewSwitch");
       const searchView = document.getElementById("searchView");
       const learnView = document.getElementById("learnView");
+      const wedukasView = document.getElementById("wedukasView");
       const learnReasonSelect = document.getElementById("learnReasonSelect");
       const learnReasonButtons = document.getElementById("learnReasonButtons");
       const learnEmpty = document.getElementById("learnEmpty");
@@ -3579,16 +3715,24 @@
       }
 
       function switchView(mode) {
-        const showSearch = mode !== "learn";
-        if (searchView) searchView.hidden = !showSearch;
-        if (learnView) learnView.hidden = showSearch;
+        const currentMode = mode === "learn" || mode === "wedukas" ? mode : "search";
+        if (searchView) searchView.hidden = currentMode !== "search";
+        if (learnView) learnView.hidden = currentMode !== "learn";
+        if (wedukasView) wedukasView.hidden = currentMode !== "wedukas";
         if (tabSearch) {
-          tabSearch.classList.toggle("active", showSearch);
-          tabSearch.setAttribute("aria-selected", showSearch ? "true" : "false");
+          const active = currentMode === "search";
+          tabSearch.classList.toggle("active", active);
+          tabSearch.setAttribute("aria-selected", active ? "true" : "false");
         }
         if (tabLearn) {
-          tabLearn.classList.toggle("active", !showSearch);
-          tabLearn.setAttribute("aria-selected", !showSearch ? "true" : "false");
+          const active = currentMode === "learn";
+          tabLearn.classList.toggle("active", active);
+          tabLearn.setAttribute("aria-selected", active ? "true" : "false");
+        }
+        if (tabWedukas) {
+          const active = currentMode === "wedukas";
+          tabWedukas.classList.toggle("active", active);
+          tabWedukas.setAttribute("aria-selected", active ? "true" : "false");
         }
       }
 
@@ -3607,6 +3751,7 @@
         mainViewSwitch.hidden = true;
         if (searchView) searchView.hidden = true;
         if (learnView) learnView.hidden = true;
+        if (wedukasView) wedukasView.hidden = true;
         startToolBtn.addEventListener("click", () => {
           document.body.classList.remove("intro-active");
           document.body.classList.add("tool-active");
@@ -4862,6 +5007,7 @@
       }
       if (tabSearch) tabSearch.addEventListener("click", () => switchView("search"));
       if (tabLearn) tabLearn.addEventListener("click", () => switchView("learn"));
+      if (tabWedukas) tabWedukas.addEventListener("click", () => switchView("wedukas"));
       if (learnReasonSelect) learnReasonSelect.addEventListener("change", filterLearningBlocks);
       expandAbbreviationsInLearningView();
       initLearningSegmentTabs();
