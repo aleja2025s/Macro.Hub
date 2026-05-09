@@ -34,9 +34,9 @@ El Macro Hub es una herramienta web interna que permite a los agentes de CX Acqu
 | Reactivación o adquisición de otros productos | 26 |
 | Consulta o sugerencia de producto no ofertado | 4 |
 | Dudas o problemas en la app después de iniciar sesión | 12 |
-| Dudas sobre Campañas y Beneficios | 5 |
+| Dudas sobre Campañas y Beneficios | 29 |
 | Dudas o problemas con programa de referidos | 28 |
-| **Total** | **218** |
+| **Total** | **242** |
 
 ---
 
@@ -44,7 +44,8 @@ El Macro Hub es una herramienta web interna que permite a los agentes de CX Acqu
 
 | Archivo | Descripción |
 |---------|-------------|
-| `macros-acq.csv` | Base de datos de las 218 macros con 7 columnas: Contact Reason, Nombre, Macro, Shuffle, Zendesk, Frases complementarias, Tip para el agente |
+| `macros-acq.csv` | Base de datos de las 242 macros con 7 columnas: Contact Reason, Nombre, Macro, Shuffle, Zendesk, Frases complementarias, Tip para el agente |
+| `embedded-macros.js` | Fallback embebido con 455 macros (incluye macros de campañas y contenido adicional) |
 
 ---
 
@@ -97,6 +98,14 @@ La herramienta registra automáticamente el uso de los agentes en un Google Shee
 - **Analytics:** Google Sheets con 6 pestañas automáticas
 - **Fuente:** Google Sans
 - **Diseño:** Header morado (#820AD1), tabs fijos, KPIs con colores lila, gráficos de barras en Unicode
+
+---
+
+## Última actualización (2026-05-08)
+
+- Se agregaron 24 macros nuevas para la campaña "Vive en modo Fútbol con Nu" en la CR "Dudas sobre Campañas y Beneficios"
+- Se actualizó `embedded-macros.js` (de 431 a 455 macros)
+- Se actualizó `macros-acq.csv` (de 218 a 242 macros) con columnas Shuffle y Zendesk formateadas
 
 ---
 
